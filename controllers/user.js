@@ -145,7 +145,7 @@ exports.resendToken = async (req, res) => {
 
 exports.forgotPassword = async (req, res) => {
    const {email} = req.body; 
-   try{   
+   try{    
     const user = await User.findOne({email});
     if(!email) return sendError(res,"please provide a valid email!")  
     if(!user) return sendError(res,"User not found, invalid request!")  
@@ -155,7 +155,7 @@ exports.forgotPassword = async (req, res) => {
      const RandomBytes = await createRandomBytes();
      const resetToken = new ResetToken({owner: user._id, token: RandomBytes}) 
      await resetToken.save();
-      
+       
     const mailName = user?.name
     const mailUserId = user?._id
     mailTransport().sendMail({
@@ -241,9 +241,7 @@ exports.getAllUsers   = async(req, res)=> {
 
 exports.deleteUser = async(req, res)=> {
   const userid = req.body.userid
-  try {
-      // await User.findOneAndDelete({_id: userid})
-      
+  try { 
       await User.findOneAndDelete({_id: userid})
       res.status(200).send("User deleted successfully")
   }

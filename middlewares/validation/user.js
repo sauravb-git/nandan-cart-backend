@@ -15,8 +15,16 @@ exports.validateUserSignUp = [
     .withMessage('Must be a valid name! &')
     .isLength({ min: 3, max: 20 })
     .withMessage('Name must be within 3 to 20 character!'),
-  check('email').normalizeEmail().isEmail().withMessage('Your email is invalid!'),
-  check('phone')
+    check('email').normalizeEmail().isEmail().withMessage('Your email is invalid!')
+    .trim()
+    .not()  
+    .isEmpty()
+    .withMessage('email is required!')
+    .isString()
+    .withMessage('email not valid')
+    .isLength({ min: 15, max: 35 })
+    .withMessage('email not valid'),
+    check('phone')
     .trim()
     .not()
     .isEmpty()

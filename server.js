@@ -8,7 +8,6 @@ app.use(cors())
 
 app.use(bodyParser.json());
 
-app.use(express.urlencoded({ extended: true }));
 
 const bkashRouter = require("./routes/bkashRouter.js");
 const pizzaRoutes = require('./routes/pizzaRoutes')
@@ -26,8 +25,6 @@ app.use('/api/orders' , ordersRoute)
 const path = require('path');
 const res = require('express/lib/response');
 
- 
- 
 app.get("/",(req,res) => {
   res.send('working')
 })

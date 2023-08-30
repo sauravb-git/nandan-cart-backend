@@ -8,19 +8,10 @@ exports.generateOTP = () => {
     }
     return otp;
 }
-
-// exports.mailTransport = () =>  nodemailer.createTransport({
-//     host: "sandbox.smtp.mailtrap.io",
-//     port: 2525,
-//     auth: {
-//     user: "ac4768099ee2f4",
-//     pass: "c13fa406a8e297"
-// }}) 
-
-  
+ 
 exports.mailTransport = () =>  nodemailer.createTransport({
-  host: "smtp-relay.sendinblue.com",
-  port: 587,
+  host: "smtp.gmail.com",
+  port: 465,
   auth: {
       user: process.env.MAILTRAP_USERNAMEBV,
       pass: process.env.MAILTRAP_PASSWORDBV
@@ -74,7 +65,7 @@ exports.generateEmailTamplateResetpassword = (mailName,RandomBytes,mailUserId) =
       <p>We're sorry to hear that you're having trouble with logging in to Nandan. We've received a 
       message that you've forgotten your password. If this was you, you can get straight back into 
       your account or reset your password now</p>  
-      <a href="http://localhost:3000/reset-password/${RandomBytes}/${mailUserId}"
+      <a href="${process.env.PRO_C_MOOD}reset-password/${RandomBytes}/${mailUserId}"
       class="button button-primary" target="_blank" rel="noopener" style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 
       'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
        position: relative; -webkit-text-size-adjust: none; border-radius: 4px; color: #fff; display: inline-block;
@@ -102,6 +93,37 @@ exports.generateEmailTamplateResetpasswordSuccess = (mailName) => {
     </body>
   </html>`
 }
-exports.plainEmailTamplate = (message) => {
-    return `${message}`
+ 
+
+exports.generateEmailTamplatePaymentCompleted = (mailName) => {
+  return `<!doctype html>
+  <html>
+    <head>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body style="font-family: sans-serif;">
+      <p>Hey ${"mailName"}!</p>
+      <p>payment completed successfully!</p>  
+      <p>please login to your account with new password</p>  
+      <p>Thanks,</p>
+      <p>The Team Nandan</p>
+    </body>
+  </html>`
 }
+
+exports.generateEmailTamplateOrderCompleted = (mailName) => {
+  return `<!doctype html>
+  <html>
+    <head>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body style="font-family: sans-serif;">
+      <p>Hey ${"mailName"}!</p>
+      <p>order completed successfully!</p>  
+      <p>please login to your account with new password</p>  
+      <p>Thanks,</p>
+      <p>The Team Nandan</p>
+    </body>
+  </html>`
+}
+ 

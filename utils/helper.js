@@ -1,4 +1,4 @@
-// const crypto = require('crypto'); 
+const crypto = require('crypto'); 
 
 exports.sendError = (res,error ,status=401) =>{
    res.status(status).json({ success: false, error });

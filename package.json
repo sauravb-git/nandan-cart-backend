@@ -24,7 +24,7 @@
     "jsonwebtoken": "^9.0.1",
     "mdb-react-ui-kit": "^6.2.0",
     "mdbreact": "^5.0.2",
-    "mongoose": "^7.4.2",
+    "mongoose": "^7.5.0",
     "node-fetch": "^2.6.1",
     "node-global-storage": "^1.2.3",
     "nodemailer": "^6.9.4",

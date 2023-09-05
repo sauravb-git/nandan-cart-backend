@@ -29,17 +29,15 @@ exports.createUser = async (req, res) => {
  
 exports.userSignIn = async (req, res) => {
     const { email, password } = req.body;
-    try{
+    try{  
       const user = await User.findOne({ email }); 
-      if (!user)
-        return sendError(res,'user not found, with the given email');
+      if (!user) return sendError(res,'user not found, with the given email');
          
       const isMatch = await user.comparePassword(password);
-      if (!isMatch)
-        return sendError(res,'email / password does not match');
+      if (!isMatch)  return sendError(res,'email / password does not match');
    
       const token = jwt.sign({ userId: user._id }, "DFDFJL43243lkfajsdf", {
-        expiresIn: '1d',
+        expiresIn: '1d', 
       });  
       const currentUser = { 
           name: user.name,

@@ -14,7 +14,7 @@ const createPayment = async (req) => {
       body: JSON.stringify({
         mode: "0011",
         payerReference: " ",
-        callbackURL: process.env.PRO_S_MOOD+"api/bkash/callback",
+        callbackURL: process.env.PRO_C_MOOD+"api/bkash/callback",
         amount: req.amount ? req.amount : 1,
         currency: "BDT",
         intent: "sale",

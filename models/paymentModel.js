@@ -1,19 +1,20 @@
 const mongoose = require("mongoose"); 
-
-const orderSchema= mongoose.Schema({
+  
+const paymentsSchema= mongoose.Schema({
     name : {type: String , require},
     email: {type: String , require},
     phone: {type: String , require},
-    userid : {type: String , require},  
-    transactionId : {type:String , require},
+    userid : {type: String , require},    
     paymentId : {type:String,   require},
-    orderItems : [],
-    shippingAddress : {type:Object},
+    orderItems : [], 
     orderAmount : {type:Number , require},
     isDelivered : {type:Boolean , require , default: false},
-    transactionStatus : {type:Boolean , require , default: false}, 
-},{
-    timestamps : true
+    transactionStatus : {type:Boolean , require , default: false},  
+    createAt: {
+        type: Date,
+        expires: 3600, 
+        default: Date.now()
+     }
 })
 
-module.exports = mongoose.model('payment' , orderSchema)
+module.exports = mongoose.model('payments' , paymentsSchema)

@@ -6,8 +6,9 @@ const searchTransaction = require("../action/searchTransaction.js");
 const refundTransaction = require("../action/refundTransaction.js");
 const Order = require("../models/orderModel"); 
 const Payments = require("../models/paymentModel"); 
+const { generateEmailTamplatePaymentCompleted } = require('../utils/mail');
  
-  
+    
 const checkout = async (req, res) => {
   const { amount, currentUser, cartItem } = req.body;
   try {
@@ -24,7 +25,7 @@ const checkout = async (req, res) => {
           orderAmount: amount, 
           paymentId: createResult?.paymentID
         }) 
-        neworder.save();
+        neworder.save(); 
       }   
     res.json(createResult); 
   } catch (e) { 
@@ -59,16 +60,24 @@ const bkashCallback = async (req, res) => {
             transactionId: response.trxID
           }) 
           neworder.save();
-        }     
-        console.log(paymentComplete.name,"paymentComplete")  
+          // const paymentTrxID =  response.trxID
+          // mailTransport().sendMail({
+          //   from: 'paymentconformation@gmail.com',
+          //   to: paymentComplete.email,
+          //   subject: "nandan payment conformation",
+          //   html: generateEmailTamplatePaymentCompleted(paymentComplete,paymentTrxID)
+          // })  
+      
+        }      
         console.log(paymentComplete,"paymentComplete")  
       } else {
         res.redirect(
-          `${process.env.PRO_C_MOOD+"fail"}?data=${response.statusMessage}`
+          `${process.env.PRO_C_MOOD+"fail"}?data=${response.statusMessage}` 
         ); 
+        console.log(response.statusMessage)
       }
       // Your frontend success route
-      res.send(
+      res.redirect(
         `${process.env.PRO_C_MOOD+"success"}?data=${response.statusMessage}`
       );
     } else {

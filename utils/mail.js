@@ -115,7 +115,7 @@ exports.generateEmailTamplateOrderCompleted = (mailName) => {
 
 
 
-exports.generateEmailTamplatePaymentCompleted = (mailName) => {
+exports.generateEmailTamplatePaymentCompleted = (paymentComplete,paymentTrxID) => {
   return `<!DOCTYPE html>
   <html>
   <head>
@@ -170,7 +170,7 @@ exports.generateEmailTamplatePaymentCompleted = (mailName) => {
   
               
                   <div style="display:inline-block; max-width:100%; min-width:100px; vertical-align:top; width:100%;" class="mobile-hide">
-                      <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:300px;">
+                      <table align="left" border="0" cellpadding="0" cellspacing="0"  style="max-width:300px;">
                           <tr>
                               <td align="right" valign="top" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 48px; font-weight: 400; line-height: 10px;">
                                   <table cellspacing="0" cellpadding="0" border="0" align="right">
@@ -187,6 +187,11 @@ exports.generateEmailTamplatePaymentCompleted = (mailName) => {
                   </div>  
                   </td>
               </tr>
+              <tr>
+                <td width="100%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;">
+                  hey ${paymentComplete.name} 
+                </td> 
+             </tr>
               <tr>
                   <td align="center" style="padding: 35px 35px 20px 35px; background-color: #ffffff;" bgcolor="#ffffff">
                   <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
@@ -210,18 +215,18 @@ exports.generateEmailTamplatePaymentCompleted = (mailName) => {
                               <table cellspacing="0" cellpadding="0" border="0" width="100%">
                                   <tr>
                                       <td width="75%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;">
-                                          Order Confirmation #
+                                         Transaction ID #
                                       </td>
                                       <td width="25%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;">
-                                           
+                                         ${paymentTrxID}
                                       </td>
-                                  </tr>
-                                  <tr>
+                                   </tr>
+                                  <tr> 
                                       <td width="75%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
-                                          Purchased Item (1)
+                                          Purchased Item (${paymentComplete?.orderAmount / 300})
                                       </td>
                                       <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
-                                          $100.00
+                                          ${paymentComplete?.orderAmount} TK.
                                       </td>
                                   </tr> 
                               </table>
@@ -235,7 +240,7 @@ exports.generateEmailTamplatePaymentCompleted = (mailName) => {
                                           TOTAL
                                       </td>
                                       <td width="25%" align="left" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;">
-                                          115 BDT
+                                         ${paymentComplete?.orderAmount} TK.
                                       </td>
                                   </tr>
                               </table>
@@ -291,8 +296,7 @@ exports.generateEmailTamplatePaymentCompleted = (mailName) => {
   </table>
       
   </body>
-  </html>
-  `
+  </html>`
 }
 
  

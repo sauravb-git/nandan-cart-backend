@@ -6,7 +6,7 @@ const searchTransaction = require("../action/searchTransaction.js");
 const refundTransaction = require("../action/refundTransaction.js");
 const Order = require("../models/orderModel"); 
 const Payments = require("../models/paymentModel"); 
-const { generateEmailTamplatePaymentCompleted } = require('../utils/mail');
+const { generateEmailTamplatePaymentCompleted , mailTransport} = require('../utils/mail');
  
     
 const checkout = async (req, res) => {
@@ -58,17 +58,17 @@ const bkashCallback = async (req, res) => {
             orderAmount: paymentComplete.orderAmount, 
             paymentId: paymentComplete.paymentId,
             transactionId: response.trxID
-          }) 
-          neworder.save();
-          // const paymentTrxID =  response.trxID
-          // mailTransport().sendMail({
-          //   from: 'paymentconformation@gmail.com',
-          //   to: paymentComplete.email,
-          //   subject: "nandan payment conformation",
-          //   html: generateEmailTamplatePaymentCompleted(paymentComplete,paymentTrxID)
-          // })  
-      
-        }      
+          })  
+          neworder.save();  
+          const paymentTrxID =  response.trxID
+          
+            mailTransport().sendMail({
+              from: 'paymentconformation@gmail.com',
+              to: paymentComplete.email,
+              subject: "nandan payment conformation",
+              html: generateEmailTamplatePaymentCompleted(paymentComplete,paymentTrxID)
+            })
+        }       
         console.log(paymentComplete,"paymentComplete")  
       } else {
         res.redirect(

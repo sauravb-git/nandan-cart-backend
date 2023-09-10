@@ -29,7 +29,7 @@ exports.createUser = async (req, res) => {
  
 exports.userSignIn = async (req, res) => {
   const { email, password } = req.body;
-  try{
+  
     const user = await User.findOne({ email }); 
     if (!user)
       return sendError(res,'user not found, with the given email');
@@ -51,10 +51,6 @@ exports.userSignIn = async (req, res) => {
         _id: user._id
     }  
     res.json({ success: true, user: currentUser,message: "User Login successfully"}); 
-
-  }catch(err){ 
-    return res.status(400).json({success: false ,message:"Failed to Login user"}); 
-  } 
 };  
  
 exports.verifyEmail = async (req , res ) => { 

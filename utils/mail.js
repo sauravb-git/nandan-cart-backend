@@ -189,7 +189,7 @@ exports.generateEmailTamplatePaymentCompleted = (paymentComplete,paymentTrxID) =
               </tr>
               <tr>
                 <td width="100%" align="left" bgcolor="#eeeeee" style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px;">
-                  hey ${paymentComplete.name} 
+                  Hey ${paymentComplete.name} 
                 </td> 
              </tr>
               <tr>

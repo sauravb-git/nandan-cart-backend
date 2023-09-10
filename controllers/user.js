@@ -25,35 +25,37 @@ exports.createUser = async (req, res) => {
     }catch(errors){ 
       return res.status(400).json({success: false ,message:"Failed to register user please fill up the requirement"}); 
     }    
-};
+}; 
  
 exports.userSignIn = async (req, res) => {
-    const { email, password } = req.body;
-    try{  
-      const user = await User.findOne({ email }); 
-      if (!user) return sendError(res,'user not found, with the given email');
-         
-      const isMatch = await user.comparePassword(password);
-      if (!isMatch)  return sendError(res,'email / password does not match');
-   
-      const token = jwt.sign({ userId: user._id }, "DFDFJL43243lkfajsdf", {
-        expiresIn: '1d', 
-      });  
-      const currentUser = { 
-          name: user.name,
-          email: user.email,
-          phone: user.phone,
-          isAdmin: user.isAdmin,
-          verified: user.verified,
-          token: token,
-          _id: user._id
-      }  
-      res.json({ success: true, user: currentUser,message: "User Login successfully"}); 
+  const { email, password } = req.body;
+  try{
+    const user = await User.findOne({ email }); 
+    if (!user)
+      return sendError(res,'user not found, with the given email');
+       
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch)
+      return sendError(res,'email / password does not match');
+ 
+    const token = jwt.sign({ userId: user._id }, "DFDFJL43243lkfajsdf", {
+      expiresIn: '1d',
+    });  
+    const currentUser = { 
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        isAdmin: user.isAdmin,
+        verified: user.verified,
+        token: token,
+        _id: user._id
+    }  
+    res.json({ success: true, user: currentUser,message: "User Login successfully"}); 
 
-    }catch(err){ 
-      return res.status(400).json({success: false ,message:"Failed to Login user"}); 
-    } 
-}; 
+  }catch(err){ 
+    return res.status(400).json({success: false ,message:"Failed to Login user"}); 
+  } 
+};  
  
 exports.verifyEmail = async (req , res ) => { 
    

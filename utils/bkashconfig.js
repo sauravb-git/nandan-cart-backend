@@ -77,7 +77,7 @@
 
 
 // sandbox api 
-// phone no : 01877722345 123456 121212
+// phone no : 01877722345 123456 12121
 
 // {
 //     "grant_token_url": "https://tokenized.sandbox.bka.sh/v1.2.0-beta/tokenized/checkout/token/grant",

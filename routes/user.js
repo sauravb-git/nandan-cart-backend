@@ -22,7 +22,7 @@ const {
     isResetTokenValid
   } = require('../middlewares/validation/user');
 
- 
+  
 router.post('/register', validateUserSignUp,validate, createUser); 
 router.post('/login',validateUserSignIn, validate, userSignIn);
 router.post('/emailverify', verifyEmail);

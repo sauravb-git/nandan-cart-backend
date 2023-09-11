@@ -30,7 +30,7 @@ exports.createUser = async (req, res) => {
 exports.userSignIn = async (req, res) => {
   const { email, password } = req.body;
   try{
-    const user = await User.findOne({ email }); 
+    const user = await User.findOne({ email: email});
     if (!user) return sendError(res,'user not found, with the given email');
        
     const isMatch = await user.comparePassword(password);

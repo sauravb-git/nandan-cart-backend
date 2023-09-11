@@ -240,7 +240,7 @@ exports.getAllUsers   = async(req, res)=> {
 exports.deleteUser = async(req, res)=> {
   const userid = req.body.userid
   try { 
-      await User.findOneAndDelete({_id: userid})
+      await User.findOneAndDelete({_id: userid}).select('-password')
       res.status(200).send("User deleted successfully")
   }
   catch(err){

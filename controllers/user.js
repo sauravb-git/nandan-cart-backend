@@ -227,7 +227,7 @@ exports.changePassword = async (req,res) => {
  
 exports.getAllUsers   = async(req, res)=> {
   try {
-      const users = await User.find({})
+      const users = await User.find({}).select('-password')
       if (users.length > 0) {
           res.status(200).send(users)
       }
@@ -240,7 +240,7 @@ exports.getAllUsers   = async(req, res)=> {
 exports.deleteUser = async(req, res)=> {
   const userid = req.body.userid
   try { 
-      await User.findOneAndDelete({_id: userid}).select('-password')
+      await User.findOneAndDelete({_id: userid})
       res.status(200).send("User deleted successfully")
   }
   catch(err){

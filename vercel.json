@@ -1,0 +1,15 @@
+{
+    "name": "url-shortner-api",
+    "version": 2,
+    "routes": [{
+            "src": "/",
+            "headers": { "cache-control": "no-cache, no-store, must-revalidate", "Access-Control-Allow-Origin": "*" },
+            "dest": "/"
+        },
+        {
+            "src": "/server",
+            "headers": { "cache-control": "no-cache, no-store, must-revalidate", "Access-Control-Allow-Origin": "*" },
+            "dest": "/server"
+        }
+    ]
+}
